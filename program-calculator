@@ -1,0 +1,112 @@
+import tkinter as calculator
+from functools import partial
+from tkinter import font
+
+b = ""   
+
+
+def eqpress():
+    try:
+        global b
+
+        total = str(eval(b))
+        out.set(total)
+        b=total
+    except:
+        out.set("error")
+        b=""
+
+
+def clean():
+    global b
+    b = ""
+    out.set(b)
+
+
+def press(a):
+    global b
+    b += str(a)
+    out.set(b)
+
+
+root = calculator.Tk()
+
+canvas = calculator.Canvas(root, height=500, width=500)
+canvas.pack()
+
+myFont = font.Font(family='Helvetica', size=30, weight='bold')
+out_font = font.Font(size=20, weight='bold')
+
+frame = calculator.Frame(root, bg='cyan')
+frame.place(relx=.1, rely=.1, relwidth=.8, relheight=.8)
+
+out = calculator.StringVar()
+out_exp = calculator.Entry(frame, textvariable=out)
+out_exp['font'] = out_font
+out_exp.place(relx=0.05, rely=0.02, relwidth=.9, relheight=.125)
+
+button = calculator.Button(frame, text='9', command=partial(press, 9), bg='gray', foreground='white')
+button['font'] = myFont
+button.place(relx=.05, rely=.2, relwidth=.2, relheight=.15)
+
+button = calculator.Button(frame, text='8', command=partial(press, 8), bg='gray', foreground='white')
+button['font'] = myFont
+button.place(relx=.3, rely=.2, relwidth=.2, relheight=.15)
+
+button = calculator.Button(frame, text='7', command=partial(press, 7), bg='gray', foreground='white')
+button['font'] = myFont
+button.place(relx=.55, rely=.2, relwidth=.2, relheight=.15)
+
+button = calculator.Button(frame, text='*', command=partial(press, '*'), bg='gray', foreground='blue')
+button['font'] = myFont
+button.place(relx=.8, rely=.2, relwidth=.15, relheight=.15)
+
+button = calculator.Button(frame, text='6', command=partial(press, 6), bg='gray', foreground='white')
+button['font'] = myFont
+button.place(relx=.05, rely=.4, relwidth=.2, relheight=.15)
+
+button = calculator.Button(frame, text='5', command=partial(press, 5), bg='gray', foreground='white')
+button['font'] = myFont
+button.place(relx=.3, rely=.4, relwidth=.2, relheight=.15)
+
+button = calculator.Button(frame, text='4', command=partial(press, 4), bg='gray', foreground='white')
+button['font'] = myFont
+button.place(relx=.55, rely=.4, relwidth=.2, relheight=.15)
+
+button = calculator.Button(frame, text='/', command=partial(press, '/'), bg='gray', foreground='blue')
+button['font'] = myFont
+button.place(relx=.8, rely=.4, relwidth=.15, relheight=.15)
+
+button = calculator.Button(frame, text='3', command=partial(press, 3), bg='gray', foreground='white')
+button['font'] = myFont
+button.place(relx=.05, rely=.6, relwidth=.2, relheight=.15)
+
+button = calculator.Button(frame, text='2', command=partial(press, 2), bg='gray', foreground='white')
+button['font'] = myFont
+button.place(relx=.3, rely=.6, relwidth=.2, relheight=.15)
+
+button = calculator.Button(frame, text='1', command=partial(press, 1), bg='gray', foreground='white')
+button['font'] = myFont
+button.place(relx=.55, rely=.6, relwidth=.2, relheight=.15)
+
+button = calculator.Button(frame, text='=', command=partial(eqpress), bg='gray', foreground='blue')
+button['font'] = myFont
+button.place(relx=.8, rely=.6, relwidth=.15, relheight=.15)
+
+button = calculator.Button(frame, text='+', command=partial(press, '+'), bg='gray', foreground='blue')
+button['font'] = myFont
+button.place(relx=.05, rely=.8, relwidth=.2, relheight=.15)
+
+button = calculator.Button(frame, text='0', command=partial(press, 0), font='Helvetica', bg='gray', fg='white')
+button['font'] = myFont
+button.place(relx=.3, rely=.8, relwidth=.2, relheight=.15)
+
+button = calculator.Button(frame, text='-', command=partial(press, '-'), bg='gray', foreground='blue')
+button['font'] = myFont
+button.place(relx=.55, rely=.8, relwidth=.2, relheight=.15)
+
+button = calculator.Button(frame, text='clr', command=clean, bg='gray', foreground='blue')
+button['font'] = myFont
+button.place(relx=.8, rely=.8, relwidth=.15, relheight=.15)
+
+root.mainloop()
